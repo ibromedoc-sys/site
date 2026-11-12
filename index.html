@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N'AUGUSTE</title>
+
+<style>
+
+body { margin: 0; font-family: Arial; }
+
+
+/* NAVBAR */
+nav {
+  background: #0b0b0b;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+}
+nav a.active {
+  color: rgb(254, 3, 3);
+  border-bottom: 3px solid rgb(255, 2, 2);
+}
+
+.logo { font-weight: bold; font-size: 20px; }
+
+nav ul { display: flex; list-style: none; }
+
+nav ul li { margin: 0 10px; }
+
+nav a { color: rgb(252, 3, 3); text-decoration: none; font-weight: bold; cursor: pointer; }
+
+/* LOGO */
+.logos img {
+  width: 150px;
+  max-width: 100%;
+  align-items: center;
+}
+
+
+/* HERO */
+.hero {
+  background: linear-gradient(to right, #000000, #000000);
+  color: rgb(251, 6, 6);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100px;
+  margin-top: 20px;
+  transition: transform 6s ease;
+}
+
+#hero-title {
+  font-size: 42px;
+  font-weight: bold;
+}
+
+#hero-text {
+  font-size: 18px;
+  color: #fc1111;
+}
+
+.hero-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.hero-text-box {
+  width: 40%;
+}
+
+
+.hero-video-box video {
+  border-radius: 10px;
+}
+.hero-video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* clé magique 🔥 */
+}
+
+.hero-video-box {
+  width: 60%;
+  height: 350px; /* hauteur fixe */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  background: black;
+}
+.hero-video-box {
+  aspect-ratio: 16/9;
+  height: auto;
+}
+
+/* HISTOIRES */
+.story-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.story-container img {
+  width: 600px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#09db56bf;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+animation:pulse 1.5s infinite;
+z-index: 9999;
+}
+
+/* description cachée */
+.desc { display: none; margin-top: 10px; font-size: 14px; }
+
+
+/* CONTACT */
+.contact {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+
+/* BANNIERE TV */
+.tv-bar {
+  display: flex;
+  align-items: center;
+  background: black;
+  color: white;
+  height: 40px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* partie gauche (label) */
+.tv-label {
+  background: #d32f2f;
+  padding: 0 15px;
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* zone défilement */
+.tv-marquee {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* texte qui défile */
+.tv-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollTV 60s linear infinite;
+}
+
+/* espacement entre messages */
+.tv-track span {
+  margin-right: 50px;
+}
+
+/* animation */
+@keyframes scrollTV {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* FOOTER ACCUEIL */
+.footer-home {
+  background: black;
+  color: rgb(225, 203, 203);
+  text-align: center;
+  padding: 30px;
+}
+
+/* animation apparition */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulseGreen {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(56,239,125,0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(56,239,125,0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(56,239,125,0);
+  }
+}
+
+
+
+/* SECTION VIDEO */
+
+/* ==============================
+   SECTION GALERIE VIDEO
+============================== */
+
+.video-section {
+    width: 100%;
+    padding: 55px 20px;
+    background: #0b0b0b;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.video-section h2 {
+    font-size: 30px;
+    color: #d63384;
+    margin-bottom: 12px;
+}
+
+.video-description {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* CADRE PRINCIPAL */
+
+.video-container {
+    max-width: 850px;
+    margin: auto;
+    padding: 18px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 22px rgba(0,0,0,0.12);
+}
+
+/* LECTEUR VIDEO */
+
+.video-player {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-player video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #000;
+}
+
+/* BOUTON CENTRAL PLAY */
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 75px;
+    height: 75px;
+
+    border: 3px solid white;
+    border-radius: 50%;
+
+    background: rgba(214, 51, 132, 0.9);
+    color: white;
+
+    font-size: 30px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s;
+    z-index: 2;
+}
+
+.play-overlay:hover {
+    transform: translate(-50%, -50%) scale(1.12);
+    background: #d63384;
+}
+
+.play-overlay.hidden {
+    display: none;
+}
+
+/* BOUTON SON */
+
+.sound-button {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.65);
+    color: white;
+
+    font-size: 19px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* INFORMATIONS VIDEO */
+
+.video-info {
+    padding: 15px 5px 5px;
+}
+
+.video-info h3 {
+    color: #333;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.video-info p {
+    color: #888;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* NAVIGATION */
+
+.video-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.nav-video {
+    flex: 1;
+    padding: 13px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #d63384;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-video:hover {
+    background: #ad2167;
+    transform: translateY(-2px);
+}
+
+.nav-video:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* TELEGRAM */
+
+.telegram-video {
+    margin-top: 25px;
+}
+
+.telegram-video a {
+    display: inline-block;
+    padding: 15px 28px;
+
+    background: #229ED9;
+    color: white;
+
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.telegram-video a:hover {
+    background: #147caf;
+    transform: translateY(-3px);
+}
+
+
+
+/* ==============================
+   RESPONSIVE TABLETTES
+============================== */
+
+@media screen and (max-width: 768px) {
+
+    .video-section {
+        padding: 40px 15px;
+    }
+
+    .video-section h2 {
+        font-size: 25px;
+    }
+
+    .video-container {
+        padding: 12px;
+    }
+
+    .play-overlay {
+        width: 65px;
+        height: 65px;
+        font-size: 25px;
+    }
+
+    .video-info h3 {
+        font-size: 18px;
+    }
+
+    .telegram-video a {
+        font-size: 13px;
+        padding: 13px 20px;
+    }
+}
+
+/* ==============================
+   RESPONSIVE TELEPHONES
+============================== */
+
+@media screen and (max-width: 480px) {
+
+    .video-section {
+        padding: 30px 10px;
+    }
+
+    .video-section h2 {
+        font-size: 21px;
+    }
+
+    .video-description {
+        font-size: 14px;
+    }
+
+    .video-container {
+        padding: 8px;
+        border-radius: 12px;
+    }
+
+    .play-overlay {
+        width: 55px;
+        height: 55px;
+        font-size: 21px;
+    }
+
+    .sound-button {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        right: 8px;
+        bottom: 8px;
+    }
+
+    .video-info h3 {
+        font-size: 16px;
+    }
+
+    .video-navigation {
+        gap: 8px;
+    }
+
+    .nav-video {
+        padding: 12px 5px;
+        font-size: 12px;
+    }
+
+    .telegram-video a {
+        display: block;
+        font-size: 12px;
+        padding: 14px 12px;
+        line-height: 1.5;
+    }
+}
+
+
+/* RESPONSIVE 🔥🔥🔥 */
+@media (max-width: 768px) {
+
+  /* NAV */
+  nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+  }
+
+  .logos img {
+    width: 90px;
+  }
+
+  /* HERO */
+  .hero-flex {
+    flex-direction: column;
+  }
+
+  .hero-text-box,
+  .hero-video-box {
+    width: 100%;
+  }
+
+  #hero-title {
+    font-size: 26px;
+  }
+
+  #hero-text {
+    font-size: 15px;
+  }
+
+  /* STORY */
+  .story-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .story-container img {
+    width: 90%;
+    margin: 0 0 15px 0;
+  }
+
+  /* TV */
+  .tv-bar {
+    font-size: 12px;
+  }
+
+  /* WHATSAPP */
+  .whatsapp {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  /* YOUTUBE */
+  .youtube-box {
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- MENU -->
+<nav>
+  
+
+  <div class="logos">
+    
+    <a href="index.html" > <img src="logo.png">  </a>
+  </div>
+</nav>
+
+<!-- PAGE ACCUEIL -->
+<div id="home" class="page active">
+
+  <div class="hero">
+  <div class="hero-flex">
+
+    <div class="hero-text-box">
+      <h1 id="hero-title">Bienvenue chez N'AUGUSTE</h1>
+      <p id="hero-text">Améliorez votre expérience sexuelle</p>
+    </div>
+
+    <div class="hero-video-box">
+      <video id="hero-video" autoplay loop muted playsinline>
+        <source src="xvideo1.mp4" type="video/webm">
+      </video>
+    </div>
+
+  </div>
+</div>
+
+   <!-- TV SHOW FLASH INFOS-->
+<div class="tv-bar">
+  <div class="tv-label">FLASH INFO</div>
+
+  <div class="tv-marquee">
+    <div class="tv-track">
+      <span> Il est important de rechercher le plaisir de son partenaire au lit</span>
+      <span> Un bon lubrifiant peut être un atout de taille ... </span>
+      <span> Ma chérie TANIA mouille bien, elle a utilisé notre secret de femme</span>
+      <span> AKPENE a pu sauver son couple grace à notre GBASS spécial</span>
+    </div>
+  </div>
+</div>
+
+  <h2 style="text-align:center;">Nos produits XXX</h2>
+
+  <div class="story-container fade-in">
+    <img id="story-img" src="produit/story1.jpg">
+    <p id="story-text">Pour tirer un bon coup dans les bonnes mesures de securité.</p>
+  </div>
+
+   <!-- BOUTON TELEGRAM -->
+    <div class="telegram-video">
+
+        <a href="https://nauguste.pages.dev/"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            VISITEZ NOTRE BOUTIQUE EN LIGNE
+
+        </a>
+
+    </div>
+  <!-- SECTION VIDEO YOUTUBE -->
+
+
+<!-- SECTION GALERIE VIDEO -->
+<section class="video-section">
+
+    <h2>Découvre nos collections HOTXXX en vidéo</h2>
+
+    <p class="video-description">
+        Retrouve nos contenus pornos GIF en vidéo.
+    </p>
+
+    <div class="video-container">
+
+        <!-- LECTEUR VIDEO -->
+        <div class="video-player" id="videoPlayerBox">
+
+            <video id="videoPlayer"
+                   playsinline
+                   preload="metadata"
+                   poster="images/miniature1.jpg">
+
+                <source src="videos/video1.mp4" type="video/mp4">
+
+                Votre navigateur ne prend pas en charge les vidéos.
+            </video>
+
+            <!-- BOUTON CENTRAL PLAY -->
+            <button class="play-overlay"
+                    id="playButton"
+                    aria-label="Lire la vidéo">
+                <span class="play-icon">▶</span>
+            </button>
+
+            <!-- BOUTON SON -->
+            <button class="sound-button"
+                    id="soundButton"
+                    aria-label="Activer ou couper le son">
+                🔊
+            </button>
+
+        </div>
+
+        <!-- INFORMATIONS VIDEO -->
+        <div class="video-info">
+
+            <h3 id="videoTitle">Découvrez nos conseils</h3>
+
+            
+
+        </div>
+
+        <!-- NAVIGATION PRECEDENT / SUIVANT -->
+        <div class="video-navigation">
+
+            <button id="prevVideo" class="nav-video">
+                ❮ Précédent
+            </button>
+
+            <button id="nextVideo" class="nav-video">
+                Suivant ❯
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- BOUTON TELEGRAM -->
+    <div class="telegram-video">
+
+        <a href="https://t.me/+kOPOfMPszr1mNTY0"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            VOIR PLUS DE VIDÉOS SUR NOTRE CHAÎNE TELEGRAM
+
+        </a>
+
+    </div>
+
+</section>
+
+
+  <!-- NOUVEL ESPACE NOIR -->
+  <div class="footer-home">
+   
+  </div>
+
+</div>
+
+
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/22893875723" class="whatsapp">💬</a>
+
+<footer style="text-align:center; padding:20px; font-size:14px;background: black;color: white;">
+   
+  <a href="galerie.html">Galerie photos</a> |
+  <a href="https://nauguste.pages.dev/">Boutique en ligne</a>
+</footer>
+
+<script>
+
+
+function unmuteVideo() {
+  const player = document.getElementById("ytplayer");
+
+  player.contentWindow.postMessage(
+    JSON.stringify({
+      event: "command",
+      func: "unMute",
+      args: []
+    }),
+    "*"
+  );
+}
+
+/* HERO SLIDER SIMPLE */
+let heroData = [
+  {video:"xvideo1.mp4", title:"Bienvenue chez N'AUGUSTE", text:"Améliorez votre expérience sexuelle"},
+  {video:"xvideo2.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo3.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo4.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo5.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo6.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo7.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo8.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo9.mp4", title:"Exprimez votre virilité", text:"La Passion à chaque instant"},
+  {video:"xvideo10.mp4", title:"C'est pour votre Bien-être", text:"Pour Une meilleure santé"}
+
+];
+
+let h = 0;
+
+function showHero(){
+  let video = document.getElementById("hero-video");
+
+  video.src = heroData[h].video;
+
+  document.getElementById("hero-title").innerText = heroData[h].title;
+  document.getElementById("hero-text").innerText = heroData[h].text;
+}
+function nextHero(){
+  h = (h+1)%heroData.length;
+  showHero();
+}
+
+setInterval(nextHero,8000);
+
+
+/* PERSONNALITES EMBLEMATIQUES */
+let stories = [
+  {img:"produit/story1.jpg", text:"Pour tirer un bon coup K.O."},
+  {img:"produit/story2.jpg", text:"Fais la vibrer, c'est son droit."},
+  {img:"produit/story3.jpg", text:"La nuit, Deviens Superman."},
+  {img:"produit/story4.jpg", text:"Fais la jouir en trois (03) langues."},
+  {img:"produit/story5.jpg", text:"Il est temps de se faire respecter par les jeunes filles."},
+  {img:"produit/story6.jpg", text:"Avec ça; ne rates jamais ta cible."}
+];
+
+let s = 0;
+
+setInterval(()=>{
+  s=(s+1)%stories.length;
+  document.getElementById("story-img").src = stories[s].img;
+  document.getElementById("story-text").innerText = stories[s].text;
+},10000);
+
+
+/* ANIMATION SCROLL */
+let elements = document.querySelectorAll('.fade-in');
+
+window.addEventListener('scroll', ()=>{
+  elements.forEach(el=>{
+    let pos = el.getBoundingClientRect().top;
+    if(pos < window.innerHeight - 50){
+      el.classList.add('show');
+    }
+  });
+});
+
+
+
+// LISTE DES VIDEOS
+
+/* ==============================
+   LISTE DES VIDEOS
+============================== */
+
+
+
+const videos = [
+
+    {
+        titre: "Crois en toi, même quand personne ne le fait",
+        mp4: "videos/video1.mp4",
+        webm: "videos/video1.webm",
+        miniature: "images/miniature1.jpg"
+    },
+
+    {
+        titre: "Ne renonce jamais à tes rêves",
+        mp4: "videos/video2.mp4",
+        webm: "videos/video2.webm",
+        miniature: "images/miniature2.jpg"
+    },
+
+    {
+        titre: "Ta discipline déterminera ton avenir",
+        mp4: "videos/video3.mp4",
+        webm: "videos/video3.webm",
+        miniature: "images/miniature3.jpg"
+    },
+
+    {
+        titre: "Chaque jour est une nouvelle opportunité",
+        mp4: "videos/video4.mp4",
+        webm: "videos/video4.webm",
+        miniature: "images/miniature4.jpg"
+    },
+
+    {
+        titre: "Travaille en silence, laisse tes résultats parler",
+        mp4: "videos/video5.mp4",
+        webm: "videos/video5.webm",
+        miniature: "images/miniature5.jpg"
+    },
+
+    {
+        titre: "La réussite commence dans ton esprit",
+        mp4: "videos/video6.mp4",
+        webm: "videos/video6.webm",
+        miniature: "images/miniature6.jpg"
+    },
+
+    {
+        titre: "N'aie pas peur de recommencer à zéro",
+        mp4: "videos/video7.mp4",
+        webm: "videos/video7.webm",
+        miniature: "images/miniature7.jpg"
+    },
+
+    {
+        titre: "Sors de ta zone de confort",
+        mp4: "videos/video8.mp4",
+        webm: "videos/video8.webm",
+        miniature: "images/miniature8.jpg"
+    },
+
+    {
+        titre: "Ton avenir dépend de tes décisions",
+        mp4: "videos/video9.mp4",
+        webm: "videos/video9.webm",
+        miniature: "images/miniature9.jpg"
+    },
+
+    {
+        titre: "Ne laisse jamais tes peurs te limiter",
+        mp4: "videos/video10.mp4",
+        webm: "videos/video10.webm",
+        miniature: "images/miniature10.jpg"
+    },
+
+    {
+        titre: "La patience est une force",
+        mp4: "videos/video11.mp4",
+        webm: "videos/video11.webm",
+        miniature: "images/miniature11.jpg"
+    },
+
+    {
+        titre: "Deviens la meilleure version de toi-même",
+        mp4: "videos/video12.mp4",
+        webm: "videos/video12.webm",
+        miniature: "images/miniature12.jpg"
+    },
+
+    {
+        titre: "Chaque échec cache une leçon",
+        mp4: "videos/video13.mp4",
+        webm: "videos/video13.webm",
+        miniature: "images/miniature13.jpg"
+    },
+
+    {
+        titre: "Ne compare pas ton chemin à celui des autres",
+        mp4: "videos/video14.mp4",
+        webm: "videos/video14.webm",
+        miniature: "images/miniature14.jpg"
+    },
+
+    {
+        titre: "Le succès demande des sacrifices",
+        mp4: "videos/video15.mp4",
+        webm: "videos/video15.webm",
+        miniature: "images/miniature15.jpg"
+    },
+
+    {
+        titre: "Lève-toi et passe à l'action",
+        mp4: "videos/video16.mp4",
+        webm: "videos/video16.webm",
+        miniature: "images/miniature16.jpg"
+    },
+
+    {
+        titre: "Ton potentiel est plus grand que tes excuses",
+        mp4: "videos/video17.mp4",
+        webm: "videos/video17.webm",
+        miniature: "images/miniature17.jpg"
+    },
+
+    {
+        titre: "Apprends à transformer les obstacles en opportunités",
+        mp4: "videos/video18.mp4",
+        webm: "videos/video18.webm",
+        miniature: "images/miniature18.jpg"
+    },
+
+    {
+        titre: "La constance bat le talent sans discipline",
+        mp4: "videos/video19.mp4",
+        webm: "videos/video19.webm",
+        miniature: "images/miniature19.jpg"
+    },
+
+    {
+        titre: "N'abandonne pas juste avant la victoire",
+        mp4: "videos/video20.mp4",
+        webm: "videos/video20.webm",
+        miniature: "images/miniature20.jpg"
+    },
+
+    {
+        titre: "Investis en toi, c'est ton meilleur investissement",
+        mp4: "videos/video21.mp4",
+        webm: "videos/video21.webm",
+        miniature: "images/miniature21.jpg"
+    },
+
+    {
+        titre: "Apprends chaque jour quelque chose de nouveau",
+        mp4: "videos/video22.mp4",
+        webm: "videos/video22.webm",
+        miniature: "images/miniature22.jpg"
+    },
+
+    {
+        titre: "La motivation te lance, la discipline te fait avancer",
+        mp4: "videos/video23.mp4",
+        webm: "videos/video23.webm",
+        miniature: "images/miniature23.jpg"
+    },
+
+    {
+        titre: "Transforme tes rêves en objectifs",
+        mp4: "videos/video24.mp4",
+        webm: "videos/video24.webm",
+        miniature: "images/miniature24.jpg"
+    },
+
+    {
+        titre: "Le moment idéal pour commencer, c'est maintenant",
+        mp4: "videos/video25.mp4",
+        webm: "videos/video25.webm",
+        miniature: "images/miniature25.jpg"
+    },
+
+    {
+        titre: "Ne laisse pas les critiques arrêter ton évolution",
+        mp4: "videos/video26.mp4",
+        webm: "videos/video26.webm",
+        miniature: "images/miniature26.jpg"
+    },
+
+    {
+        titre: "La confiance en soi change tout",
+        mp4: "videos/video27.mp4",
+        webm: "videos/video27.webm",
+        miniature: "images/miniature27.jpg"
+    },
+
+    {
+        titre: "Sois plus fort que tes mauvaises habitudes",
+        mp4: "videos/video28.mp4",
+        webm: "videos/video28.webm",
+        miniature: "images/miniature28.jpg"
+    },
+
+    {
+        titre: "Les grandes réussites commencent petit",
+        mp4: "videos/video29.mp4",
+        webm: "videos/video29.webm",
+        miniature: "images/miniature29.jpg"
+    },
+
+    {
+        titre: "Chaque effort compte, même invisible",
+        mp4: "videos/video30.mp4",
+        webm: "videos/video30.webm",
+        miniature: "images/miniature30.jpg"
+    },
+
+    {
+        titre: "Apprends à maîtriser ton temps",
+        mp4: "videos/video31.mp4",
+        webm: "videos/video31.webm",
+        miniature: "images/miniature31.jpg"
+    },
+
+    {
+        titre: "Ta situation actuelle ne définit pas ton avenir",
+        mp4: "videos/video32.mp4",
+        webm: "videos/video32.webm",
+        miniature: "images/miniature32.jpg"
+    },
+
+    {
+        titre: "Ose viser plus haut",
+        mp4: "videos/video33.mp4",
+        webm: "videos/video33.webm",
+        miniature: "images/miniature33.jpg"
+    },
+
+    {
+        titre: "Fais de tes difficultés une source de force",
+        mp4: "videos/video34.mp4",
+        webm: "videos/video34.webm",
+        miniature: "images/miniature34.jpg"
+    },
+
+    {
+        titre: "La réussite appartient à ceux qui persévèrent",
+        mp4: "videos/video35.mp4",
+        webm: "videos/video35.webm",
+        miniature: "images/miniature35.jpg"
+    },
+
+    {
+        titre: "Arrête de remettre ta réussite à demain",
+        mp4: "videos/video36.mp4",
+        webm: "videos/video36.webm",
+        miniature: "images/miniature36.jpg"
+    },
+
+    {
+        titre: "Entoure-toi de personnes qui te tirent vers le haut",
+        mp4: "videos/video37.mp4",
+        webm: "videos/video37.webm",
+        miniature: "images/miniature37.jpg"
+    },
+
+    {
+        titre: "Ton attitude détermine ton altitude",
+        mp4: "videos/video38.mp4",
+        webm: "videos/video38.webm",
+        miniature: "images/miniature38.jpg"
+    },
+
+    {
+        titre: "Le courage, c'est avancer malgré la peur",
+        mp4: "videos/video39.mp4",
+        webm: "videos/video39.webm",
+        miniature: "images/miniature39.jpg"
+    },
+
+    {
+        titre: "Ne cherche pas la facilité, cherche à progresser",
+        mp4: "videos/video40.mp4",
+        webm: "videos/video40.webm",
+        miniature: "images/miniature40.jpg"
+    },
+
+    {
+        titre: "Construis aujourd'hui la vie que tu veux demain",
+        mp4: "videos/video41.mp4",
+        webm: "videos/video41.webm",
+        miniature: "images/miniature41.jpg"
+    },
+
+    {
+        titre: "Le secret est de ne jamais cesser d'apprendre",
+        mp4: "videos/video42.mp4",
+        webm: "videos/video42.webm",
+        miniature: "images/miniature42.jpg"
+    },
+
+    {
+        titre: "Sois reconnaissant, mais continue d'avancer",
+        mp4: "videos/video43.mp4",
+        webm: "videos/video43.webm",
+        miniature: "images/miniature43.jpg"
+    },
+
+    {
+        titre: "Tes rêves méritent tes efforts",
+        mp4: "videos/video44.mp4",
+        webm: "videos/video44.webm",
+        miniature: "images/miniature44.jpg"
+    },
+
+    {
+        titre: "La réussite est un marathon, pas un sprint",
+        mp4: "videos/video45.mp4",
+        webm: "videos/video45.webm",
+        miniature: "images/miniature45.jpg"
+    },
+
+    {
+        titre: "Ne laisse personne décider de ta valeur",
+        mp4: "videos/video46.mp4",
+        webm: "videos/video46.webm",
+        miniature: "images/miniature46.jpg"
+    },
+
+    {
+        titre: "Fais aujourd'hui ce que ton futur te remerciera",
+        mp4: "videos/video47.mp4",
+        webm: "videos/video47.webm",
+        miniature: "images/miniature47.jpg"
+    },
+
+    {
+        titre: "La persévérance transforme l'impossible en possible",
+        mp4: "videos/video48.mp4",
+        webm: "videos/video48.webm",
+        miniature: "images/miniature48.jpg"
+    },
+
+    {
+        titre: "Développe ton mental avant de chercher le succès",
+        mp4: "videos/video49.mp4",
+        webm: "videos/video49.webm",
+        miniature: "images/miniature49.jpg"
+    },
+
+    {
+        titre: "Chaque matin, choisis de devenir meilleur",
+        mp4: "videos/video50.mp4",
+        webm: "videos/video50.webm",
+        miniature: "images/miniature50.jpg"
+    },
+
+    {
+        titre: "Ne laisse pas tes erreurs définir ton histoire",
+        mp4: "videos/video51.mp4",
+        webm: "videos/video51.webm",
+        miniature: "images/miniature51.jpg"
+    },
+
+    {
+        titre: "Sois patient avec tes progrès",
+        mp4: "videos/video52.mp4",
+        webm: "videos/video52.webm",
+        miniature: "images/miniature52.jpg"
+    },
+
+    {
+        titre: "La grandeur commence par de petites actions",
+        mp4: "videos/video53.mp4",
+        webm: "videos/video53.webm",
+        miniature: "images/miniature53.jpg"
+    },
+
+    {
+        titre: "Ton passé ne doit pas limiter ton futur",
+        mp4: "videos/video54.mp4",
+        webm: "videos/video54.webm",
+        miniature: "images/miniature54.jpg"
+    },
+
+    {
+        titre: "Apprends à te dépasser chaque jour",
+        mp4: "videos/video55.mp4",
+        webm: "videos/video55.webm",
+        miniature: "images/miniature55.jpg"
+    },
+
+    {
+        titre: "Ne crains pas les grands défis",
+        mp4: "videos/video56.mp4",
+        webm: "videos/video56.webm",
+        miniature: "images/miniature56.jpg"
+    },
+
+    {
+        titre: "La discipline est le pont entre rêve et réussite",
+        mp4: "videos/video57.mp4",
+        webm: "videos/video57.webm",
+        miniature: "images/miniature57.jpg"
+    },
+
+    {
+        titre: "Fais de chaque jour une victoire",
+        mp4: "videos/video58.mp4",
+        webm: "videos/video58.webm",
+        miniature: "images/miniature58.jpg"
+    },
+
+    {
+        titre: "Ton heure viendra, continue de travailler",
+        mp4: "videos/video59.mp4",
+        webm: "videos/video59.webm",
+        miniature: "images/miniature59.jpg"
+    },
+
+    {
+        titre: "Deviens la personne que tu admires",
+        mp4: "videos/video60.mp4",
+        webm: "videos/video60.webm",
+        miniature: "images/miniature60.jpg"
+    }
+
+];
+
+
+
+
+/* ==============================
+   ELEMENTS HTML
+============================== */
+
+const player = document.getElementById("videoPlayer");
+const playButton = document.getElementById("playButton");
+const soundButton = document.getElementById("soundButton");
+
+const title = document.getElementById("videoTitle");
+
+
+const prevButton = document.getElementById("prevVideo");
+const nextButton = document.getElementById("nextVideo");
+
+
+let currentVideo = 0;
+let soundStarted = false;
+
+
+/* ==============================
+   CHARGER UNE VIDEO
+============================== */
+
+function loadVideo(index, autoplay = false) {
+
+    currentVideo = (index + videos.length) % videos.length;
+
+    const video = videos[currentVideo];
+
+    player.pause();
+
+    player.innerHTML = `
+        <source src="${video.webm}" type="video/webm">
+        <source src="${video.mp4}" type="video/mp4">
+    `;
+
+    player.poster = video.miniature;
+
+    title.textContent = video.titre;
+
+    
+
+    player.load();
+
+    playButton.classList.remove("hidden");
+
+    soundButton.textContent = player.muted ? "🔇" : "🔊";
+
+    prevButton.disabled = videos.length <= 1;
+    nextButton.disabled = videos.length <= 1;
+
+    if (autoplay) {
+        player.play().catch(() => {
+            playButton.classList.remove("hidden");
+        });
+    }
+}
+
+
+/* ==============================
+   LECTURE / PAUSE
+============================== */
+
+playButton.addEventListener("click", function() {
+
+    soundStarted = true;
+
+    player.muted = false;
+
+    player.play().catch(error => {
+        console.log("Erreur de lecture :", error);
+    });
+
+});
+
+
+player.addEventListener("play", function() {
+
+    playButton.classList.add("hidden");
+
+});
+
+
+player.addEventListener("pause", function() {
+
+    playButton.classList.remove("hidden");
+
+});
+
+
+/* ==============================
+   ACTIVER / COUPER LE SON
+============================== */
+
+soundButton.addEventListener("click", function() {
+
+    player.muted = !player.muted;
+
+    if (!player.muted) {
+        soundStarted = true;
+    }
+
+    soundButton.textContent = player.muted ? "🔇" : "🔊";
+
+});
+
+
+/* ==============================
+   VIDEO PRECEDENTE
+============================== */
+
+prevButton.addEventListener("click", function() {
+
+    loadVideo(currentVideo - 1, true);
+
+});
+
+
+/* ==============================
+   VIDEO SUIVANTE
+============================== */
+
+nextButton.addEventListener("click", function() {
+
+    loadVideo(currentVideo + 1, true);
+
+});
+
+
+/* ==============================
+   PASSAGE AUTOMATIQUE
+============================== */
+
+player.addEventListener("ended", function() {
+
+    loadVideo(currentVideo + 1, soundStarted);
+
+});
+
+
+/* ==============================
+   INITIALISATION
+============================== */
+
+loadVideo(0);
+
+
+</script>
+
+</body>
+</html>

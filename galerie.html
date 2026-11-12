@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N'AUGUSTE</title>
+
+<style>
+
+body { margin: 0; font-family: Arial; }
+
+
+/* NAVBAR */
+nav {
+  background: #0b0b0b;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+}
+nav a.active {
+  color: rgb(254, 3, 3);
+  border-bottom: 3px solid rgb(255, 2, 2);
+}
+
+.logo { font-weight: bold; font-size: 20px; }
+
+nav ul { display: flex; list-style: none; }
+
+nav ul li { margin: 0 10px; }
+
+nav a { color: rgb(252, 3, 3); text-decoration: none; font-weight: bold; cursor: pointer; }
+
+/* LOGO */
+.logos img {
+  width: 150px;
+  max-width: 100%;
+  align-items: center;
+}
+
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#09db56bf;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+animation:pulse 1.5s infinite;
+z-index: 9999;
+}
+
+/* description cachée */
+.desc { display: none; margin-top: 10px; font-size: 14px; }
+
+
+/* CONTACT */
+.contact {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+
+/* FOOTER ACCUEIL */
+.footer-home {
+  background: black;
+  color: rgb(225, 203, 203);
+  text-align: center;
+  padding: 30px;
+}
+
+
+/* ==============================
+   SECTION GALERIE NOIRE
+============================== */
+
+.gallery-section {
+    width: 100%;
+    padding: 60px 25px;
+    background: #080808;
+    box-sizing: border-box;
+}
+
+/* TITRE */
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery-header h2 {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.gallery-header p {
+    color: #aaa;
+    font-size: 16px;
+}
+
+/* GRILLE */
+
+.gallery-grid {
+    max-width: 1300px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+/* PHOTOS MINIATURES */
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+    border-radius: 8px;
+
+    background: #191919;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.5s ease,
+                opacity 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+    opacity: 0.8;
+}
+
+/* ==============================
+   LIGHTBOX
+============================== */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.97);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 99999;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+/* CONTENU PHOTO */
+
+.lightbox-content {
+    width: 85%;
+    height: 85%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 5px;
+
+    animation: photoZoom 0.3s ease;
+}
+
+/* ANIMATION */
+
+@keyframes photoZoom {
+    from {
+        transform: scale(0.90);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* BOUTON FERMER */
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+
+    background: transparent;
+    border: none;
+
+    color: white;
+    font-size: 45px;
+
+    cursor: pointer;
+    z-index: 10;
+}
+
+.lightbox-close:hover {
+    color: #ff4b80;
+}
+
+/* BOUTONS PRECEDENT / SUIVANT */
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.12);
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+    transition: 0.3s;
+
+    z-index: 10;
+}
+
+.lightbox-nav:hover {
+    background: #d63384;
+}
+
+.lightbox-nav.prev {
+    left: 25px;
+}
+
+.lightbox-nav.next {
+    right: 25px;
+}
+
+
+
+
+/* ==============================
+   TABLETTES
+============================== */
+
+@media screen and (max-width: 900px) {
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-section {
+        padding: 45px 18px;
+    }
+
+    .gallery-header h2 {
+        font-size: 26px;
+    }
+
+    .lightbox-content {
+        width: 82%;
+    }
+
+    .lightbox-nav.prev {
+        left: 10px;
+    }
+
+    .lightbox-nav.next {
+        right: 10px;
+    }
+}
+
+
+/* ==============================
+   TELEPHONES
+============================== */
+
+@media screen and (max-width: 600px) {
+
+    .gallery-section {
+        padding: 35px 10px;
+    }
+
+    .gallery-header {
+        margin-bottom: 25px;
+    }
+
+    .gallery-header h2 {
+        font-size: 21px;
+        letter-spacing: 1px;
+    }
+
+    .gallery-header p {
+        font-size: 14px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-item {
+        border-radius: 5px;
+    }
+
+    .lightbox-content {
+        width: 90%;
+        height: 75%;
+    }
+
+    .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .lightbox-nav.prev {
+        left: 5px;
+    }
+
+    .lightbox-nav.next {
+        right: 5px;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 15px;
+        font-size: 38px;
+    }
+}
+
+
+
+/* RESPONSIVE 🔥🔥🔥 */
+@media (max-width: 768px) {
+
+  /* NAV */
+  nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+  }
+
+  .logos img {
+    width: 90px;
+  }
+
+ 
+  
+
+  /* TV */
+  .tv-bar {
+    font-size: 12px;
+  }
+
+  /* WHATSAPP */
+  .whatsapp {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- MENU -->
+<nav>
+  
+
+  <div class="logos">
+    
+    <a href="index.html" > <img src="logo.png">  </a>
+  </div>
+</nav>
+
+<!-- PAGE ACCUEIL -->
+
+<!-- ==============================
+     GALERIE PHOTO
+============================== -->
+
+<section class="gallery-section">
+
+    <div class="gallery-header">
+        <h2>NOTRE GALERIE PHOTO</h2>
+        <p>Découvrez des moments forts en images</p>
+    </div>
+
+    <!-- GRILLE DES PHOTOS -->
+    <div class="gallery-grid" id="galleryGrid">
+        <!-- Les 60 photos seront ajoutées automatiquement par JavaScript -->
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     AGRANDISSEMENT DES PHOTOS
+============================== -->
+
+<div class="lightbox" id="lightbox">
+
+    <!-- FERMER -->
+    <button class="lightbox-close" id="closeLightbox"
+            aria-label="Fermer">
+        &times;
+    </button>
+
+    <!-- PHOTO PRECEDENTE -->
+    <button class="lightbox-nav prev"
+            id="prevPhoto"
+            aria-label="Photo précédente">
+        &#10094;
+    </button>
+
+    <!-- PHOTO AGRANDIE -->
+    <div class="lightbox-content">
+
+        <img src="" id="lightboxImage" alt="Photo agrandie">
+
+    </div>
+
+    <!-- PHOTO SUIVANTE -->
+    <button class="lightbox-nav next"
+            id="nextPhoto"
+            aria-label="Photo suivante">
+        &#10095;
+    </button>
+
+</div>
+
+
+
+ 
+
+
+
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/22893875723" class="whatsapp">💬</a>
+
+<footer style="text-align:center; padding:20px; font-size:14px;background: black;color: white;">
+   
+  <a href="galerie.html">Galerie photos</a> |
+  <a href="https://nauguste.pages.dev/">Boutique en ligne</a>
+</footer>
+
+<script>
+
+
+/* ==============================
+   CONFIGURATION DES PHOTOS
+============================== */
+
+// 60 photos dans le dossier galerie
+
+const photos = Array.from({ length: 60 }, (_, i) => ({
+    src: `galerie/photo${i + 1}.jpg`,
+    alt: `Galerie photo ${i + 1}`
+}));
+
+
+/* ==============================
+   ELEMENTS HTML
+============================== */
+
+const galleryGrid = document.getElementById("galleryGrid");
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImage = document.getElementById("lightboxImage");
+
+const closeLightbox = document.getElementById("closeLightbox");
+
+const prevPhoto = document.getElementById("prevPhoto");
+
+const nextPhoto = document.getElementById("nextPhoto");
+
+
+let currentPhoto = 0;
+
+let autoSlide = null;
+
+
+/* ==============================
+   AFFICHER LES 60 MINIATURES
+============================== */
+
+photos.forEach((photo, index) => {
+
+    const item = document.createElement("div");
+
+    item.className = "gallery-item";
+
+    const img = document.createElement("img");
+
+    img.src = photo.src;
+
+    img.alt = photo.alt;
+
+    img.loading = "lazy";
+
+    img.decoding = "async";
+
+    item.appendChild(img);
+
+    item.addEventListener("click", () => {
+
+        openLightbox(index);
+
+    });
+
+    galleryGrid.appendChild(item);
+
+});
+
+
+/* ==============================
+   OUVRIR UNE PHOTO
+============================== */
+
+function openLightbox(index) {
+
+    currentPhoto = index;
+
+    showPhoto();
+
+    lightbox.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    startAutoSlide();
+
+}
+
+
+/* ==============================
+   AFFICHER LA PHOTO
+============================== */
+
+function showPhoto() {
+
+    const photo = photos[currentPhoto];
+
+    lightboxImage.src = photo.src;
+
+    lightboxImage.alt = photo.alt;
+
+}
+
+
+/* ==============================
+   PHOTO SUIVANTE
+============================== */
+
+function showNextPhoto() {
+
+    currentPhoto++;
+
+    if (currentPhoto >= photos.length) {
+
+        currentPhoto = 0;
+
+    }
+
+    showPhoto();
+
+}
+
+
+/* ==============================
+   PHOTO PRECEDENTE
+============================== */
+
+function showPrevPhoto() {
+
+    currentPhoto--;
+
+    if (currentPhoto < 0) {
+
+        currentPhoto = photos.length - 1;
+
+    }
+
+    showPhoto();
+
+}
+
+
+/* ==============================
+   BOUTONS NAVIGATION
+============================== */
+
+nextPhoto.addEventListener("click", () => {
+
+    showNextPhoto();
+
+    startAutoSlide();
+
+});
+
+
+prevPhoto.addEventListener("click", () => {
+
+    showPrevPhoto();
+
+    startAutoSlide();
+
+});
+
+
+/* ==============================
+   DEFILEMENT AUTOMATIQUE
+============================== */
+
+function startAutoSlide() {
+
+    clearInterval(autoSlide);
+
+    autoSlide = setInterval(() => {
+
+        showNextPhoto();
+
+    }, 4000);
+
+}
+
+
+/* ==============================
+   FERMER LA GALERIE
+============================== */
+
+function closeGallery() {
+
+    lightbox.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+    clearInterval(autoSlide);
+
+}
+
+
+closeLightbox.addEventListener("click", closeGallery);
+
+
+/* FERMER EN CLIQUANT SUR LE FOND */
+
+lightbox.addEventListener("click", function(e) {
+
+    if (e.target === lightbox) {
+
+        closeGallery();
+
+    }
+
+});
+
+
+/* ==============================
+   NAVIGATION AU CLAVIER
+============================== */
+
+document.addEventListener("keydown", function(e) {
+
+    if (!lightbox.classList.contains("active")) return;
+
+    if (e.key === "ArrowRight") {
+
+        showNextPhoto();
+
+        startAutoSlide();
+
+    }
+
+    if (e.key === "ArrowLeft") {
+
+        showPrevPhoto();
+
+        startAutoSlide();
+
+    }
+
+    if (e.key === "Escape") {
+
+        closeGallery();
+
+    }
+
+});
+
+
+/* ==============================
+   NAVIGATION TACTILE
+   GLISSER A GAUCHE OU A DROITE
+============================== */
+
+let touchStartX = 0;
+
+lightbox.addEventListener("touchstart", function(e) {
+
+    touchStartX = e.changedTouches[0].screenX;
+
+}, { passive: true });
+
+
+lightbox.addEventListener("touchend", function(e) {
+
+    const touchEndX = e.changedTouches[0].screenX;
+
+    const difference = touchEndX - touchStartX;
+
+    if (Math.abs(difference) > 50) {
+
+        if (difference < 0) {
+
+            showNextPhoto();
+
+        } else {
+
+            showPrevPhoto();
+
+        }
+
+        startAutoSlide();
+
+    }
+
+}, { passive: true });
+
+
+
+
+</script>
+
+</body>
+</html>
